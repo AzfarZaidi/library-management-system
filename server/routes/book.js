@@ -5,15 +5,31 @@ const express = require("express"),
 
 // Importing controller
 const bookController = require('../controller/books');
+// importing controller
+const adminController = require('../controllers/admin');
 
 // Browse books
-router.get("/books/:filter/:value/:page", bookController.getBooks);
+router.get("/:filter/:value/:page", bookController.getBooks);
 
 // Fetch books by search value
-router.post("/books/:filter/:value/:page", bookController.findBooks);
+router.post("/:filter/:value/:page", bookController.findBooks);
 
 // Fetch individual book details
-router.get("/books/details/:book_id", bookController.getBookDetails);
+router.get("/details/:book_id", bookController.getBookDetails);
+
+
+//admin -> add new book
+router.get("/add", adminController.getAddNewBook);
+
+router.post("/add", adminController.postAddNewBook);
+
+
+//admin -> update book
+router.post("update/:book_id", adminController.postUpdateBook);
+
+//admin -> delete book
+router.get("delete/:book_id", adminController.getDeleteBook);
+
 
 
 module.exports = router;
